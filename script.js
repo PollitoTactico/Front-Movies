@@ -1,3 +1,4 @@
+app.use(cors());
 const API_URL = {
     users: "https://users-service.azurewebsites.net/api/users",
     recommendations: "https://recommendation-service.azurewebsites.net",
