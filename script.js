@@ -1,4 +1,3 @@
-app.use(cors());
 const API_URL = {
     users: "https://users-service.azurewebsites.net/api/users",
     recommendations: "https://recommendation-service.azurewebsites.net",
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         genres.forEach((genre) => {
             genresSelects.forEach((select) => {
                 const option = document.createElement("option");
-                option.value = genre.id;
+                option.value = genre.id; // Usamos el ID como valor
                 option.textContent = genre.name;
                 select.appendChild(option);
             });
@@ -93,3 +92,4 @@ document.getElementById("recommend-form").addEventListener("submit", async (e) =
         document.getElementById("movies").innerText = "Error al obtener películas.";
     }
 });
+
