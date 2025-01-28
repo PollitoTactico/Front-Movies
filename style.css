@@ -1,13 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
 h1, h2 {
     text-align: center;
+    color: #007bff;
 }
 
 form {
@@ -17,12 +18,12 @@ form {
     margin-bottom: 20px;
 }
 
-form input, form button {
-    margin: 5px;
+form input, form select, form button {
+    margin: 10px;
     padding: 10px;
-    width: 80%;
-    max-width: 300px;
     font-size: 16px;
+    width: 90%;
+    max-width: 400px;
 }
 
 form button {
@@ -30,6 +31,7 @@ form button {
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 form button:hover {
@@ -40,19 +42,18 @@ form button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
 }
 
 #movies div {
-    margin: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: white;
-    max-width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #movies img {
     max-width: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
 }

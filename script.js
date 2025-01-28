@@ -1,14 +1,34 @@
 const API_URL = {
-    users: "https://users-service.azurewebsites.net",
+    users: "https://users-service.azurewebsites.net/api/users",
     recommendations: "https://recommendation-service.azurewebsites.net",
 };
 
+// Poblar géneros en los combo boxes
+document.addEventListener("DOMContentLoaded", async () => {
+    const genresSelects = [document.getElementById("reg-genres"), document.getElementById("genres")];
+    try {
+        const response = await fetch(`${API_URL.recommendations}/genres`);
+        const genres = await response.json();
 
+        genres.forEach((genre) => {
+            genresSelects.forEach((select) => {
+                const option = document.createElement("option");
+                option.value = genre.id;
+                option.textContent = genre.name;
+                select.appendChild(option);
+            });
+        });
+    } catch (error) {
+        console.error("Error al cargar géneros:", error);
+    }
+});
+
+// Registro de usuario
 document.getElementById("register-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const username = document.getElementById("reg-username").value;
     const password = document.getElementById("reg-password").value;
-    const genres = document.getElementById("reg-genres").value.split(",");
+    const genres = Array.from(document.getElementById("reg-genres").selectedOptions).map(opt => opt.value);
 
     try {
         const response = await fetch(`${API_URL.users}/register`, {
@@ -24,6 +44,7 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     }
 });
 
+// Inicio de sesión
 document.getElementById("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const username = document.getElementById("login-username").value;
@@ -47,12 +68,13 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }
 });
 
+// Buscar recomendaciones
 document.getElementById("recommend-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const genres = document.getElementById("genres").value;
+    const genres = Array.from(document.getElementById("genres").selectedOptions).map(opt => opt.value);
 
     try {
-        const response = await fetch(`${API_URL.recommendations}?genres=${genres}`);
+        const response = await fetch(`${API_URL.recommendations}/recommendations?genres=${genres.join(",")}`);
         const movies = await response.json();
 
         const moviesDiv = document.getElementById("movies");
